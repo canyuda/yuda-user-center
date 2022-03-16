@@ -1,0 +1,50 @@
+spring:
+  application:
+    name: user-center
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/yuda
+    username: root
+    password: QWEasd!123
+  redis:
+    host: localhost
+    port: 6379
+    database: 0
+    timeout: 3000
+    lettuce:
+      pool:
+        max-active: 8
+        max-wait: 1
+        max-idle: 8
+        min-idle: 0
+  kafka:
+    bootstrap-servers:
+      - localhost:9092
+    client-id: user-center
+    template:
+      default-topic: test_topic
+    producer:
+      client-id: user-center-producer
+      batch-size: 0
+    consumer:
+      auto-commit-interval: 5000
+      enable-auto-commit: true
+      client-id: user-center-consumer
+      group-id: test_group_id
+    listener:
+      client-id: user-center-listener
+      missing-topics-fatal: false
+
+server:
+  port: 8081
+mybatis-plus:
+  mapper-locations: classpath*:/mybatis/**/*.xml
+  global-config:
+    db-config:
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+      logic-delete-field: is_deleted
+
+logging:
+  level:
+    com.yuda.usercenter.mapper: debug

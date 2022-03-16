@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <properties resource="mybatis-generator/mysql.properties"/>
+    <context id="MySQL" targetRuntime="MyBatis3" defaultModelType="flat">
+        <property name="autoDelimitKeywords" value="true"/>
+        <property name="javaFileEncoding" value="UTF-8"/>
+        <property name="javaFormatter" value="org.mybatis.generator.api.dom.DefaultJavaFormatter"/>
+        <property name="xmlFormatter" value="org.mybatis.generator.api.dom.DefaultXmlFormatter"/>
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin">
+            <property name="addGWTInterface" value="false"/>
+            <property name="suppressJavaInterface" value="false"/>
+        </plugin>
+        <commentGenerator>
+            <property name="dateFormat" value="yyyy-MM-dd HH:mm:ss"/>
+            <property name="suppressDate" value="true"/>
+            <property name="suppressAllComments" value="true"/>
+            <property name="addRemarkComments" value="true"/>
+        </commentGenerator>
+        <jdbcConnection driverClass="${yuda.mysql.driverClass}"
+                        connectionURL="${yuda.mysql.url}"
+                        userId="${yuda.mysql.username}"
+                        password="${yuda.mysql.password}">
+        </jdbcConnection>
+        <javaTypeResolver type="org.mybatis.generator.internal.types.JavaTypeResolverDefaultImpl">
+            <property name="forceBigDecimals" value="true"/> <!--todo-->
+            <property name="useJSR310Types" value="true"/> <!--todo-->
+        </javaTypeResolver>
+        <javaModelGenerator targetPackage="${yuda.domain.package}"
+                            targetProject="./src/main/java">
+            <property name="constructorBased" value="false"/>
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+            <property name="immutable" value="false"/>
+        </javaModelGenerator>
+        <sqlMapGenerator targetPackage="${yuda.mapper.xml.package}"
+                         targetProject="./src/main/resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+        <javaClientGenerator type="XMLMAPPER"
+                             targetPackage="${yuda.mapper.interface.package}"
+                             targetProject="./src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <table tableName="${yuda.table.name}"
+               domainObjectName="${yuda.table.domain.name}"
+               enableDeleteByPrimaryKey="false"
+               enableInsert="true"
+               enableSelectByPrimaryKey="true"
+               enableUpdateByPrimaryKey="true"
+               enableUpdateByExample="false"
+               enableSelectByExample="false"
+               enableDeleteByExample="false"
+               enableCountByExample="false"
+               modelType="flat"
+               escapeWildcards="false"
+               delimitAllColumns="true"
+               delimitIdentifiers="true">
+            <property name="constructorBased" value="false"/>
+            <property name="ignoreQualifiersAtRuntime" value="false"/>
+            <property name="immutable" value="false"/>
+            <property name="modelOnly" value="false"/>
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>
+    </context>
+</generatorConfiguration>
